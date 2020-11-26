@@ -1,0 +1,257 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', Serif;
+    text-align: center;
+}
+
+.header {
+    height: 80px;
+    background: #15317E;
+    width: 100%;
+    color: white;
+}
+
+.header h1 {
+    display: block;
+    padding: 20px;
+}
+
+.header h1 span {
+    font-weight: 200;
+}
+
+.form {
+    margin-top: 40px;
+}
+
+form {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+}
+
+input {
+    height: 35px;
+    width: 200px;
+    border-radius: 6px;
+    border: 1px solid royalblue;
+    outline: none;
+    padding: 5px;
+    font-weight: bolder;
+}
+
+input:focus {
+    border: 1px solid #4169e1;
+    outline: none;
+}
+
+button  {
+  position: relative;
+  border: 1px solid #4169e1;
+  background: white;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 20px;
+  padding: 8px 15px;
+  font-weight: bolder;
+  transition: 0.8s;
+  color: royalblue;
+  overflow: hidden;
+  z-index: 0;
+  outline: none;
+}
+
+button:hover {
+  color: white;
+}
+
+button:hover::before {
+  height: 180%;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: royalblue;
+  transition: .8s;
+  z-index: -1;
+  border-radius: 0 0 50% 50%;
+  outline: none;
+}
+
+button:focus, button::before:focus {
+    border: 1px solid royalblue;
+    outline: none;
+}
+
+.errors {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: fit-content;
+    width: fit-content;
+    background: #F8D7DA;
+}
+
+.errors p {
+    padding: 8px 15px;
+    color: #721C24;
+}
+
+.image {
+    display: block;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img {
+    max-width: 800px;
+    max-height: 800px;
+    margin-top: 40px;
+    width: 90%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 2px solid rgba(0, 0, 0, .2);
+    margin-bottom: 40px;
+}
+
+.download_button {
+    padding: 10px 15px;
+    background: royalblue;
+    text-decoration: none;
+    border-radius: 6px;
+    color: white;
+}
+
+#loader {
+    width: 100px;
+    height: 100px;
+    border: none;
+    outline: none;
+    display: none;
+    margin-top: -20px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#header_link {
+    text-decoration: none;
+    color: white;
+}
+
+.failed {
+    border-color: #721C24;
+    color: #721C24;
+}
+
+.failed:before {
+    background: #721C24;
+}
+
+.failed:focus, .failed::before:focus {
+    border-color: #721C24;
+}
+
+.success {
+    border-color: #4cae4c;
+    color: #4cae4c;
+}
+
+.success:before {
+    background: #4cae4c;
+}
+
+.success:focus, .success::before:focus {
+    border-color: #4cae4c;
+}
+
+table {
+  margin: auto auto;
+  text-align: center;
+  padding: 10px 10px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-radius: 8px 8px 0 0;
+}
+
+tr:nth-child(even) {
+  background: #eeeeee;
+}
+
+td {
+  padding: 15px;
+  border-radius: 4px;
+}
+
+thead {
+  padding: 10px;
+  margin: auto;
+  background: #24252A;
+  color: white;
+}
+
+.query {
+    border: 1px solid rgba(0,0,0,0.3);
+    padding: 8px;
+    margin-top: 20px;
+    height: 750px;
+    position: relative;
+    overflow-y: auto;
+    font-size: 20px;
+    margin-left: 29px;
+}
+
+.command {
+    position: absolute;
+    width: 95%;
+    margin-left: 29px;
+    margin-top: 0;
+}
+
+.cmd-in {
+    width: 100%;
+    border-left: 1px solid rgba(0,0,0,0.3);
+    border-right: 1px solid rgba(0,0,0,0.3);
+    border-top: none;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+    border-radius: 0;
+    padding: 8px 5px;
+}
+
+.cmd-in:focus {
+    border-left: 1px solid rgba(0,0,0,0.3);
+    border-right: 1px solid rgba(0,0,0,0.3);
+    border-top: none;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+    border-radius: 0;
+    padding: 8px 5px;
+}
+
+.query-txt {
+    padding: 5px 8px;;
+}
+
+.left {
+    text-align: left;
+    color: #721C24;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.right {
+    text-align: right;
+    color: #4cae4c;
+}

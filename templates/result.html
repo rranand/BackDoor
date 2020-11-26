@@ -1,0 +1,55 @@
+{% if message %}
+    <div class="errors">
+        <p>{{ message }}</p>
+    <script>
+        document.getElementById('hideImg').innerText = "Scan Failed";
+        document.getElementById('hideImg').classList.add("failed");
+    </script>
+    </div>
+{% elif result %}
+    <script>
+        document.getElementById('hideImg').innerText = "Scan Done";
+        document.getElementById('hideImg').classList.add("success");
+    </script>
+    <div class="image">
+         <table>
+             <thead>
+                <td>Sr. No.</td>
+                <td>Ip</td>
+                <td>Operating System</td>
+                <td>Administrator</td>
+             </thead>
+                {% for i in result %}
+                    <tr>
+                        {% for j in i %}
+                            <td>{{ j }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+         </table>
+    </div>
+    <div class="form">
+        <p>Enter 0, to broadcast to all else choose any IP!!!</p>
+        <form id="choose_ip" method="post">
+            {% csrf_token %}
+            <input type="number" id="serial" name="serial" placeholder="Enter Serial Number">
+            <button type="submit">Select</button>
+        </form>
+        <script>
+            $('#choose_ip').on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: 'select',
+                    data: $('#choose_ip').serialize(),
+                    dataType: 'html',
+                    success: function (data) {
+                        let x= $('.queryBox');
+                        x.innerHTML = '';
+                        x.html(data);
+                    }
+                });
+            })
+        </script>
+    </div>
+{% endif %}

@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BackDoor</title>
+    <link type="text/css" rel="stylesheet" href="{% static 'style.css' %}">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800" rel="stylesheet">
+    <script src="{% static 'jquery.min.js' %}"></script>
+    <script src="{% static 'script.js' %}"></script>
+</head>
+<body>
+    <div class="header">
+        <a id="header_link" href="{% url 'homepage' %}"><h1>Back<span>Door</span></h1></a>
+    </div>
+    <div class="form"></div>
+        <h2>Remote Accessing Tool</h2>
+        <form id="user_form" method="post">
+            {% csrf_token %}
+            <br><button id="hideImg" type="submit" onclick="hideIt()">Scan Your Network</button>
+        </form>
+        <img id="loader" src="{% static 'loading.gif' %}" alt="Wait Stalker, Your request is Processing!!!" title="Loading">
+        <div id="loadContent" class="loadContent">
+        </div>
+
+        <div id="queryBox" class="queryBox"></div>
+</body>
+<script>
+    $(document).ready(function() {
+        $('#user_form').on('submit', function () {
+            document.getElementById('hideImg').innerText = "Scanning your network...Wait 15 Seconds!!!";
+            const img = document.getElementById('loader');
+            img.style.display = 'block';
+        })
+    });
+</script>
+</html>

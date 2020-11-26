@@ -1,0 +1,98 @@
+{% if message %}
+    <div class="errors">
+        <p>{{ message }}</p>
+    </div>
+{% elif result %}
+    <input id="index" value="{{ result }}" hidden>
+    <div class="image query" id="adder">
+
+    </div>
+    <form id="command" method="post" class="command">
+        {% csrf_token %}
+        <input id="qy" class="cmd-in" type="text" name="qy" placeholder="Enter Command">
+    </form>
+
+    <script>
+        var index = document.getElementById("index").value;
+        $('#command').on('submit', function (e) {
+            let qy = document.getElementById("qy").value;
+            e.preventDefault();
+            if (qy != null && qy.length > 0) {
+                var cmd = document.createElement("p");
+                cmd.innerHTML = qy;
+                cmd.className = "query-txt right";
+                document.getElementById("adder").appendChild(cmd);
+                if (index === "-1") {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'queryAll',
+                        data: $('#command').serialize(),
+                        dataType: 'json',
+                        success: function (data) {
+                            var i;
+                            for(i in data) {
+                                var cmd = document.createElement("p");
+                                cmd.innerHTML = data[i];
+                                cmd.className = "query-txt left";
+                                document.getElementById("adder").appendChild(cmd);
+                            }
+                            document.getElementById("command").reset();
+
+                            if (data['msge']) {
+                                document.getElementById('hideImg').innerText = "Scanning your network...Wait 15 Seconds!!!";
+                                document.getElementById('loader').style.display = "block";
+                                document.getElementById("loadContent").innerHTML = "";
+                                document.getElementById("queryBox").innerHTML = "";
+                                $.ajax({
+                                    type: 'POST',
+                                    url: 'scan',
+                                    data: $('#user_form').serialize(),
+                                    dataType: 'html',
+                                    success: function (data) {
+                                        document.getElementById('loader').style.display = "none";
+                                        let x= $('.loadContent');
+                                        x.innerHTML = '';
+                                        x.html(data);
+                                    }
+                                });
+                            }
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'query/'+index+'/',
+                        data: $('#command').serialize(),
+                        dataType: 'json',
+                        success: function (data) {
+                            var cmd = document.createElement("p");
+                            cmd.innerHTML = data['reply'];
+                            cmd.className = "query-txt left";
+                            document.getElementById("adder").appendChild(cmd);
+                            document.getElementById("command").reset();
+
+                            if (data['msge']) {
+                                document.getElementById('hideImg').innerText = "Scanning your network...Wait 15 Seconds!!!";
+                                document.getElementById('loader').style.display = "block";
+                                document.getElementById("queryBox").innerHTML = "";
+                                document.getElementById("loadContent").innerHTML = "";
+                                $.ajax({
+                                type: 'POST',
+                                url: 'scan',
+                                data: $('#user_form').serialize(),
+                                dataType: 'html',
+                                success: function (data) {
+                                        document.getElementById('loader').style.display = "none";
+                                        let x= $('.loadContent');
+                                        x.innerHTML = '';
+                                        x.html(data);
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+{% endif %}
